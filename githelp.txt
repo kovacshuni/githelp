@@ -45,6 +45,8 @@ Aliases
 		rs = reset --hard HEAD
 		type = cat-file -t
 		dump = cat-file -p
+		gr = log --oneline --graph --decorate
+		poh = push origin HEAD
 
 Sensitive logging
 	git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago'
