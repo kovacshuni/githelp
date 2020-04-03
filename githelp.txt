@@ -239,3 +239,7 @@ Make empty commit
 Revert a Git repository to a specific version, previous commit
 	git revert --no-commit 0766c053..HEAD
 	git commit
+	
+Merging two branches without merging files. 
+Merge discarding any changes B would introduce. Still, the commits from B are now in A. Files are at the state of A before the merge.
+git merge -s ours B
