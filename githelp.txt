@@ -45,7 +45,7 @@ Aliases
 		rs = reset --hard HEAD
 		type = cat-file -t
 		dump = cat-file -p
-		gr = log --oneline --graph --decorate
+		gr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 		poh = push origin HEAD
 
 Sensitive logging
