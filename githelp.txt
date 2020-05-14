@@ -1,136 +1,140 @@
-Don't let me Google that for you :P
-The Git reference: git checkout --help
+Don't let me Google that for you
+Just ctrl-f this file
 
-Pushing
-	Recommended pushing method
-		git push <remote> sourceBranch
-		example: git push origin master
+# The Git reference:
+git checkout --help
 
-	Push current branch to the same name. It's ok. Make sure you're there, where you think.
-		git push origin HEAD
+# Pushing
+# Recommended pushing method
+git push <remote> sourceBranch
+git push origin master
 
-	Explicit push.
-		git push <remote> sourceBranch:destinationBranch
+# Push current branch to the same name. It's ok. Make sure you're there, where you think.
+git push origin HEAD
 
-	Push to origin all the branches that are tracked. Not recommended :)
-		git push
-    or  git push <remote>
+# Explicit push.
+git push <remote> sourceBranch:destinationBranch
 
-	Deletes the toBeDeleted branch from origin.
-		git push origin :toBeDeleted
+# Push to origin all the branches that are tracked. Not recommended :)
+git push
+git push <remote>
 
-	Forces to update the pointers on the remote. Warning.
-		git push -f
+# Deletes the toBeDeleted branch from origin.
+git push origin :toBeDeleted
 
-Pulling
-	Recommended pulling method
-	on branch <branchname>!!> git pull origin :<branchname>
-	example: on branch master!!> git pull origin :master
+# Forces to update the pointers on the remote. Warning.
+git push -f
 
-	Pulls every tracked branch from every remote. Not recommended.
-	git pull
+# Pulling
+git pull origin reposBranch:localBranch
+git pull --rebase
 
-	git pull origin reposBranch:localBranch
-	git pull --rebase
+# Pulls every tracked branch from every remote. Not recommended.
+git pull
 
-Aliases
-	[alias]
-		co = checkout
-		ci = commit
-		st = status
-		br = branch
-		hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-		lg = log --decorate
-		cl = clean -f -d .
-		rs = reset --hard HEAD
-		type = cat-file -t
-		dump = cat-file -p
-		gr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-		poh = push origin HEAD
+# Aliases. You may copy these into your .gitconfig
 
-Sensitive logging
-	git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago'
-	git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-	git log -SmethodePageUpdater --unified=3
-	git log origin/master..HEAD
-	git log b6b672a158c5 --unified=3 ft-methodeAdapter-api\src\main\java\com\ft\methodeadapter\domain\builder\MethodeSlideshowStoryBuilder.java
-	plus paramters: --pretty=oneline --max-count=2 --since='5 minutes ago' --until='5 minutes ago'
-	plus paramters: --author=Hun --all --decorate=full --not master --follow
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	lg = log --decorate
+	gr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	cl = clean -f -d .
+	rs = reset --hard HEAD
+	type = cat-file -t
+	dump = cat-file -p
+	poh = push origin HEAD
 
-Displaying the contents of a commit
-	Shows the changes of the last commit (HEAD)
-		git show
+# Logging
+git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago'
+git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+git log -SsomeStringYoureSearching --unified=3
+git log origin/master..HEAD
+git log b6b672a158c5 --unified=3 path/to/your/File.java
+plus paramters: --pretty=oneline --max-count=2 --since='5 minutes ago' --until='5 minutes ago'
+plus paramters: --author=Hun --all --decorate=full --not master --follow
 
-	Shows the changes of a specific commit
-		git show <hash>
+# Displaying the contents of a commit
+git show
+git show <hash>
+git show --format=fuller <hash>
+git show --name-only
 
-	Shows all details of a specific commit
-		git show --format=fuller <hash>
+# Reverting
+git revert 783hf2
+git revert 1290fj --no-commit
+git revert HEAD~4 --no-edit
 
-	Shows only the filenames that changed
-		git show --name-only
+# Revert a Git repository to a specific version, previous commit
+git revert --no-commit 0766c053..HEAD
+git commit
 
-Reverting
-	git revert 783hf2
-	git revert 1290fj --no-commit
-	git revert HEAD~4 --no-edit
+# To set your branch's tip to a specific commit (revert but reset-like)
+git reset 56e05fced
+git reset --soft HEAD@{1}
+git commit -m "Revert to 56e05fced"
+git reset --hard
 
-To revert to a specific commit (revert reset-ish) way before the master or other branch end.
-  git reset 56e05fced
-  git reset --soft HEAD@{1}
-  git commit -m "Revert to 56e05fced"
-  git reset --hard
+# Sharing
+# Anywhere on the sharing computer>
+git daemon --verbose --export-all --base-path="/home/kovacshuni/Code"
 
-Sharing
-	Anywhere on the sharing computer>
-		git daemon --verbose --export-all --base-path="c:"
+# Anywhere on the accessing compouter>
+git ls-remote git://IP_orComputerName/Relative/path/to/dir/where/the/.git/is/based/on/the/base-path/on/remote
 
-	Anywhere on the accessing compouter>
-		git ls-remote git://IP_orComputerName/Relative/path/to/dir/where/the/.git/is,/based/on/the/base-path/on/remote
+# Bundleing repo
+git bundle create backup.bundle master
+git bundle create backup.bundle master --all --tags --remotes
 
-	Bundleing repo
-		git bundle create backup.bundle master
+# Unbundle... unpack
+git clone backup.bundle my-project
 
-	or u can try
-		git bundle create backup.bundle master --all --tags --remotes
+# Moving repositories
+git clone --bare https://github.com/exampleuser/old-repository.git
+cd old-repository.git
+git push --mirror https://github.com/exampleuser/new-repository.git
 
-	Unbundle... unpack
-		git clone backup.bundle my-project
+# Ignoring files
+# Long term ingore:
+.gitignore file
 
-Ignoring files
-	Long term ingore:
-		.gitignore file
-	Short term ignore, updates
-		git update-index --assume-unchanged file1.txt file2.txt
-		git update-index --no-assume-unchanged file1.txt file2.txt
-		git-ls-files
-		git ls-files -v --others
-	Long term ignore, locally only, not working
-		.git/config/exclude file
+# Short term ignore, updates
+git update-index --assume-unchanged file1.txt file2.txt
+git update-index --no-assume-unchanged file1.txt file2.txt
+git-ls-files
+git ls-files -v --others
 
-Diffs
-	Changes in the working tree not yet staged for the next commit.
-		git diff
+# Long term ignore, locally only
+.git/config/exclude file
 
-	Changes between the index and your last commit; what you would be committing if you run "git commit" without "-a" option.
-		git diff --cached
+# Diffs
+# Changes in the working tree not yet staged for the next commit.
+git diff
 
-	Changes in the working tree since your last commit; what you would be committing if you run "git commit -a"
-		git diff HEAD
+# diff staged files
+git diff --cached
 
-	Changes between two random revisions for a specific file.
-	git diff RELEASE-2.34..master -- path/to/file
+# Changes in the working tree since your last commit; what you would be committing if you run "git commit -a"
+git diff HEAD
 
+# Changes between two random revisions for a specific file.
+git diff RELEASE-2.34..master -- path/to/file
 
-Forcing a branch pointer to point to a commit. Do not use with shared objects.
-	git branch --force my-branch-name 7361f1fbh69
+# diff two random files
+git diff HEAD:kubernetes/staging/a.deployment.yaml kubernetes/production/a.deployment.yaml
 
-Making a branch track a remote branch
-	git branch -u origin/master
+# Forcing a branch pointer to point to a commit. Do not use with shared objects.
+git branch --force my-branch-name 7361f1fbh69
 
-Rebasing
-	git rebase --interactive 69b79bb878fdae
-	git pull --rebase
+# Making a branch track a remote branch
+git branch -u origin/master
+
+# Rebasing
+git rebase --interactive 69b79bb878fdae
+git pull --rebase
 
 o---o---o---o---o  master
          \
@@ -138,7 +142,7 @@ o---o---o---o---o  master
                            \
                             o---o---o  topic
 
-    git rebase --onto master next topic
+git rebase --onto master next topic
 
 o---o---o---o---o  master
 	|            \
@@ -148,14 +152,15 @@ o---o---o---o---o  master
 
 ----------------------
 
-    I have the following graph:
+# I have the following graph:
 
    800      9ff
     v        v
 ----o--o--o--o--o--o <-master
               \
                o--o--o <-feature
-    And i want the following state after the command:
+			   
+# And i want the following state after the command:
 
    800      9ff
     v        v
@@ -163,86 +168,79 @@ o---o---o---o---o  master
      \
       o--o--o <-feature
 
-	So how do i rebase backwards on the same branch?
-
-	git rebase --onto 800 9ff
+# So how do i rebase backwards on the same branch?
+git rebase --onto 800 9ff
 
 --------------------------
 
 
-Editor to be Notepad++ instead of oldboy Vim:
-	[core]
-		editor = notepad++.exe -multiInst -notabbar -nosession -noPlugin
-	Have notepad++ in your path. (Make sure you reopen all cmd windows.)
-	
-Visual Studio Code
-        git config --global core.editor "code --wait"
+# Editor to be Visual Studio Code
+git config --global core.editor "code --wait"
 
-Blame
-	git blame -c config\mysql\staging\changes\2.12\492_insert_image_id_in_cc_image_format_mapping.sql
+# editor to be notepad++, 
+# Have notepad++ in your path. (Make sure you reopen all cmd windows.)
+# go to your .gitconfig and add/edit
+[core]
+	editor = notepad++.exe -multiInst -notabbar -nosession -noPlugin
 
-Cleaning unversioned files:
-	git clean -f -d
+# Blame
+git blame -c config\mysql\staging\changes\2.12\492_insert_image_id_in_cc_image_format_mapping.sql
 
-Amending
-	git commit --amend --date="Wed 12 Jun 2012 09:18 +0000" --author="Your Name <your.email@domain.com>"
-	git commit --amend --date="$(date -R)" ##in bash only
+# Cleaning unversioned files:
+git clean -f -d
 
-Merging fast forward only:
-	git merge --ff-only <branchname>
+# Amending
+git commit --amend --date="Wed 12 Jun 2012 09:18 +0000" --author="Your Name <your.email@domain.com>"
+git commit --amend --date="$(date -R)" ##in bash only
 
-Recovering lost, detached commits:
-	git fsck --lost-found
+# Merging
+# Merging fast forward only:
+git merge --ff-only <branchname>
 
-Showing diffs in stash:
-	git stash show -p stash@{0}
-
-Checking out (reverting to) a specific single file from a specific revision:
-	git checkout <hash> <path-to-file>
-	git checkout 8b8805a src/main/webapp/velocity/pageFragments/videoThumb.vm
-
-Patching
-	First, commit the changes you want to patch.
-	git format-patch -1
-	git apply filename.patch
-
-Storing credentials on your machine
-	git config credential.helper store
-	git push http://example.com/repo.git
-	Username: <type your username>
-	Password: <type your password>
-
-	[...several days later...]
-	git push http://example.com/repo.git
-	[your credentials are used automatically]
-
-Moving repositories
-	git clone --bare https://github.com/exampleuser/old-repository.git
-	cd old-repository.git
-	git push --mirror https://github.com/exampleuser/new-repository.git
-
-Signing commits with your gpg key
-  git config --global user.signingkey F2C7AB29
-  git commit -S
-  always:
-  git config --global commit.gpgsign true
-
-Show tag on HEAD
-  git describe --tag —always
-
-Reset branch to no history / empty branch.
-  git update-ref -d HEAD
-
-Make empty commit
-  git commit --allow-empty -m "A new repo is born"
-
-Revert a Git repository to a specific version, previous commit
-	git revert --no-commit 0766c053..HEAD
-	git commit
-	
-Merging two branches without merging files. 
-Merge discarding any changes B would introduce. Still, the commits from B are now in A. Files are at the state of A before the merge.
+# Merging two branches without merging files. 
+# Merge discarding any changes B would introduce. Still, the commits from B are now in A. Files are at the state of A before the merge.
 git merge -s ours B
 
-# diff two random files
-git diff HEAD:kubernetes/staging/core.deployment.yaml kubernetes/production/core.deployment.yaml
+
+# Recovering lost, detached commits:
+git fsck --lost-found
+
+# Showing diffs in stash:
+git stash show -p stash@{0}
+
+# Checking out (reverting to) a specific single file from a specific revision:
+git checkout <hash> <path-to-file>
+git checkout 8b8805a src/main/webapp/velocity/pageFragments/videoThumb.vm
+
+# Patching
+# First, commit the changes you want to patch.
+git format-patch -1
+git apply filename.patch
+
+# Storing credentials on your machine. Uhh this is old, i'm not sure if you want to use this.
+git config credential.helper store
+git push http://example.com/repo.git
+Username: <type your username>
+Password: <type your password>
+
+[...several days later...]
+git push http://example.com/repo.git
+[your credentials are used automatically]
+
+
+
+# Signing commits with your gpg key
+git config --global user.signingkey F2C7AB29
+git commit -S
+  
+# Always signing:
+git config --global commit.gpgsign true
+
+# Show tag on HEAD
+git describe --tag —always
+
+# Reset branch to no history / empty branch.
+git update-ref -d HEAD
+
+# Make empty commit
+git commit --allow-empty -m "A new repo is born"
