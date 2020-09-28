@@ -173,6 +173,8 @@ git rebase --onto 800 9ff
 
 --------------------------
 
+# Rebase first commit, to only have one
+git rebase -i --root
 
 # Editor to be Visual Studio Code
 git config --global core.editor "code --wait"
