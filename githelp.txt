@@ -4,6 +4,14 @@ Just ctrl-f this file
 # The Git reference:
 git checkout --help
 
+# Configuring different personalities on one machine:
+[user]
+    email = hkovacs@hiya.com
+    name = Hunor Kovacs
+    signingkey = 3DF729C6
+[includeIf "gitdir:~/Code/"]
+  path = .gitconfig-personal
+
 # Pushing
 # Recommended pushing method
 git push <remote> sourceBranch
