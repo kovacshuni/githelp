@@ -6,10 +6,10 @@ git checkout --help
 
 # Configuring different personalities on one machine:
 [user]
-    email = hkovacs@hiya.com
+    email = hkovacs@work.com
     name = Hunor Kovacs
     signingkey = 3DF729C6
-[includeIf "gitdir:~/Code/"]
+[includeIf "gitdir:~/personal-workspace/"]
   path = .gitconfig-personal
 
 # Pushing
