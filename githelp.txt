@@ -167,7 +167,7 @@ o---o---o---o---o  master
 ----o--o--o--o--o--o <-master
               \
                o--o--o <-feature
-			   
+
 # And i want the following state after the command:
 
    800      9ff
@@ -187,7 +187,7 @@ git rebase -i --root
 # Editor to be Visual Studio Code
 git config --global core.editor "code --wait"
 
-# editor to be notepad++, 
+# editor to be notepad++,
 # Have notepad++ in your path. (Make sure you reopen all cmd windows.)
 # go to your .gitconfig and add/edit
 [core]
@@ -207,7 +207,7 @@ git commit --amend --date="$(date -R)" ##in bash only
 # Merging fast forward only:
 git merge --ff-only <branchname>
 
-# Merging two branches without merging files. 
+# Merging two branches without merging files.
 # Merge discarding any changes B would introduce. Still, the commits from B are now in A. Files are at the state of A before the merge.
 git merge -s ours B
 
@@ -242,7 +242,7 @@ git push http://example.com/repo.git
 # Signing commits with your gpg key
 git config --global user.signingkey F2C7AB29
 git commit -S
-  
+
 # Always signing:
 git config --global commit.gpgsign true
 
@@ -254,3 +254,10 @@ git update-ref -d HEAD
 
 # Make empty commit
 git commit --allow-empty -m "A new repo is born"
+
+# Search code content in entire git database
+git grep <regexp> $(git rev-list --all)
+same:
+git rev-list --all | xargs git grep <expression>
+git grep <regexp> $(git rev-list --all -- lib/util) -- lib/util
+https://stackoverflow.com/questions/2928584/how-to-grep-search-committed-code-in-the-git-history
