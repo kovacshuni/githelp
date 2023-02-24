@@ -262,5 +262,8 @@ git rev-list --all | xargs git grep <expression>
 git grep <regexp> $(git rev-list --all -- lib/util) -- lib/util
 https://stackoverflow.com/questions/2928584/how-to-grep-search-committed-code-in-the-git-history
 
+# Search history by commit message
+git log --grep=<pattern>
+
 # ignore changes to a file already indexed in your repository. careful when stashing, it might re-awaken it
 git update-index --assume-unchanged chilipiper.code-workspace
