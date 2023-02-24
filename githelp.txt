@@ -196,6 +196,11 @@ git config --global core.editor "code --wait"
 # Blame
 git blame -c config\mysql\staging\changes\2.12\492_insert_image_id_in_cc_image_format_mapping.sql
 
+# Set up blame to skip formatting commits
+echo "erf9e8f" > .git/config/.git-blame-ignore-revs
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+https://stackoverflow.com/questions/53502654/how-do-i-run-a-code-formatter-over-my-source-without-modifying-git-history
+
 # Cleaning unversioned files:
 git clean -f -d
 
